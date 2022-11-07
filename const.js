@@ -1,6 +1,7 @@
 const commands = `
 /start - Перезапустить бота
 /help - Помощь
+/message - обратиться в ООО "ЖКХ"
 `
 
 const textMes = `Напишите текст обращения`
