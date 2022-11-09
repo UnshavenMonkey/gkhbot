@@ -1,12 +1,9 @@
 const commands = `
 /start - Перезапустить бота
 /help - Помощь
-/message - обратиться в ООО "ЖКХ"
+/message - Создать заявку в ООО "ЖКХ"
 `
-
-const textMes = `Напишите текст обращения`
-const textZav = `Напишите текст заявки`
+const textStatement = `Напишите текст заявки`
 
 module.exports.commands = commands;
-module.exports.textMes = textMes;
-module.exports.textZav = textZav;
+module.exports.textStatement = textStatement;
