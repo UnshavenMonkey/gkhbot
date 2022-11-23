@@ -1,8 +1,7 @@
 const { Telegraf, Markup, Scenes, session} = require('telegraf');
 require('dotenv').config();
 const messageScene = require('./scenes/message');
-// const text = require('./const');
-const main = require('./statemebtFunc');
+const text = require('./const');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const stage = new Scenes.Stage([messageScene]);
@@ -36,22 +35,7 @@ bot.start(async (ctx) => {
     ]))
 });
 
-// bot.help((ctx) => ctx.reply(text.commands));
-//
-// bot.command('message', async (ctx) => {
-//     try {
-//         await ctx.replyWithHTML('<b>Создать заявку в ЖКХ</b>', Markup.inlineKeyboard(
-//             [
-//                 [Markup.button.callback('Заявка', 'btn_zav')]
-//             ]
-//         ))
-//     } catch(e) {
-//         console.error(e);
-//     }
-//     main().catch((error) => console.error(error));
-// })
-
-// addActionBot('btn_zav', text.textStatement)
+bot.help((ctx) => ctx.reply(text.commands));
 
 bot.launch();
 
