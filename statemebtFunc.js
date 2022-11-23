@@ -15,8 +15,36 @@ async function main() {
         obj: authenticateUserWithPhoneAndPassword(data: {phone: $phone, password: $password}) {
          token item { id name } } }
     `
+    const queryAllProperty = gql`
+    {  
+      allProperties(
+        where: { 
+          organization: { 
+            id: "51b171d3-b54d-48f8-a36a-f8308f518637" 
+          } 
+        }
+      ) {
+        id
+        address
+        name
+        type
+        __typename
+        organization {
+          __typename
+          id
+        }
+      }
+    }
+    `
+
     const data = await graphQLClient.request(queryAuth, variables);
-    return data;
+    // console.log (data)
+    graphQLClient.setHeaders({
+        "Authorization": `Bearer ${data.obj.token}`
+    })
+
+    const allProperty = await graphQLClient.request(queryAllProperty, variables);
+
 
 }
 

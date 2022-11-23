@@ -4,9 +4,9 @@ const main = require('../statemebtFunc.js')
 const startStep = new Composer();
 startStep.on('text', async (ctx) => {
     try {
-        ctx.wizard.state.data = {}
         ctx.wizard.state.user = await main().catch((error) => console.error(error));
-        return ctx.scene.leave()
+        ctx.wizard.state.adress = ctx.message.text
+        return ctx.wizard.next();
     } catch (e) {
         console.log(e)
     }
