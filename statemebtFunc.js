@@ -16,7 +16,6 @@ async function main() {
          token item { id name } } }
     `
     const data = await graphQLClient.request(queryAuth, variables);
-    console.log(data);
     return data;
 
 }
