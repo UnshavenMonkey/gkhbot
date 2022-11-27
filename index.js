@@ -20,7 +20,7 @@ bot.action('info', async (ctx) => {
 bot.action('create_msg', async (ctx) => {
     try {
         await ctx.answerCbQuery();
-        await ctx.replyWithHTML('Введите текст заявки');
+        await ctx.replyWithHTML('Введите название улицы');
         await ctx.scene.enter('messageScene');
     } catch(e) {
         console.error(e);
