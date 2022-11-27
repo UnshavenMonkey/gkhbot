@@ -53,13 +53,11 @@ const sendMsgStep = new Composer();
 sendMsgStep.action('send', async (ctx) => {
     try {
         await ctx.answerCbQuery();
-        const ticket = await main(ctx.wizard.state.ticket).catch((error) => {
-            return ctx.replyWithHTML(`Вы ввели неправильный адрес, пожалуйста попробуйте еще раз`)
-        });
+        const ticket = await main(ctx.wizard.state.ticket)
         await ctx.replyWithHTML(`Ваша заявка принята и зарегестрирована под номером ${ticket.createTicket.number}`);
         return ctx.scene.leave();
     } catch (e) {
-        console.log(e)
+        return ctx.replyWithHTML(`Вы ввели неправильный адрес, пожалуйста попробуйте еще раз`)
     }
 
 })
