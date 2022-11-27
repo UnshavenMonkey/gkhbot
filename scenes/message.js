@@ -17,6 +17,17 @@ const buildStep = new Composer();
 buildStep.on('text', async (ctx) => {
     try {
         ctx.wizard.state.ticket.build = ctx.message.text
+        await ctx.replyWithHTML('Введите номер квартиры');
+        return ctx.wizard.next();
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+const unitStep = new Composer();
+unitStep.on('text', async (ctx) => {
+    try {
+        ctx.wizard.state.ticket.unit = ctx.message.text
         await ctx.replyWithHTML('Введите текст заявки');
         return ctx.wizard.next();
     } catch (e) {
@@ -53,5 +64,5 @@ sendMsgStep.action('send', async (ctx) => {
 
 })
 
-const messageScene = new Scenes.WizardScene('messageScene', streetStep, buildStep, msgTextStep, sendMsgStep);
+const messageScene = new Scenes.WizardScene('messageScene', streetStep, buildStep, unitStep, msgTextStep, sendMsgStep);
 module.exports = messageScene;

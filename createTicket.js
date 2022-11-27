@@ -44,6 +44,8 @@ async function main(ticket) {
         $sourceId: ID!
         $propertyId: ID!
         $details: String
+        $unitName: String
+        $unitType: String
       ) {
         createTicket(
           data: {
@@ -53,6 +55,8 @@ async function main(ticket) {
             property: { connect: { id: $propertyId } }
             source: { connect: { id: $sourceId } }
             details: $details
+            unitName: $unitName
+            unitType: $unitType
           }
         ) {
           id
@@ -78,6 +82,8 @@ async function main(ticket) {
         organizationId: process.env.ID_ORG,
         sourceId: "779d7bb6-b194-4d2c-a967-1f7321b2787f",
         propertyId: build.id,
+        unitName: ticket.unit,
+        unitType: "flat",
         details: ticket.text
     }
 
