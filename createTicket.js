@@ -64,37 +64,23 @@ async function main(ticket) {
         }
       }
     `
-
-    const queryAllTicket = gql`
-      {
-        allTickets {
-          id
-          organization {
-            id
-            name
-          }
-          details
-        }
-      }
-    `
-
+    // get auth token and set token to request headers
     const data = await graphQLClient.request(queryAuth, variables);
     graphQLClient.setHeaders({
         "Authorization": `Bearer ${data.obj.token}`
     })
-
+    // get property id
     const allProperty = await graphQLClient.request(queryAllProperty, variables);
-    const street = await allProperty.allProperties.find((item) => item.address.match(ticket.street) && item.address.endsWith(ticket.build));
+    const build = await allProperty.allProperties.find((item) => item.address.match(ticket.street) && item.address.endsWith(ticket.build));
 
     const createTicketVariables = {
         fingerprint: crypto.randomUUID(),
         organizationId: process.env.ID_ORG,
         sourceId: "779d7bb6-b194-4d2c-a967-1f7321b2787f",
-        propertyId: street.id,
+        propertyId: build.id,
         details: ticket.text
     }
 
-    // await graphQLClient.request(queryCreateTicket, createTicketVariables).then((data) => data);
     return await graphQLClient.request(queryCreateTicket, createTicketVariables).then((data) => data)
 }
 
